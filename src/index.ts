@@ -1,7 +1,5 @@
-const world = 'fuck you'
+import Player from './player'
 
-export function hello (word: string = world): string {
-    return `Hello ${world}! `
-}
+const player = new Player('#3e3e3e')
 
-console.log(hello('World!!!!'))
+console.log(`My color is ${player.color}`)
