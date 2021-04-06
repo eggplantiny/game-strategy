@@ -1,5 +1,8 @@
-import Player from './player'
+import { TFT, AllTrust } from './strategies'
 
-const player = new Player('#3e3e3e')
+function playGame () : void {
+    const tft = new TFT()
+    const allTrust = new AllTrust()
 
-console.log(`My color is ${player.color}`)
+
+}
