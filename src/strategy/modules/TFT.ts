@@ -1,4 +1,4 @@
-import { Strategy } from "../strategy";
+import { Strategy } from "../../type";
 
 export default class TFT extends Strategy {
     play (gameHistory: boolean[]): boolean {
