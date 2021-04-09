@@ -1,6 +1,6 @@
 import { Strategy } from "../../type";
 
-export default class AllTrust extends Strategy {
+export default class AllCooperator extends Strategy {
     play (): boolean {
         return true
     }

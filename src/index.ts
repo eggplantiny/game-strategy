@@ -1,17 +1,19 @@
-import {AllTrust, TFT} from './strategy'
-import {GameState, History, Strategy} from "./type"
+import { AllCooperator, AllBetrayer, TFT } from './strategy'
+import { GameState } from "./type"
 import Player from "./player";
 
-function play (h1 : History, h2 : History, s1 : Strategy, s2 : Strategy) : GameState {
+function play (p1: Player, p2: Player) : GameState {
 
-    const s1Item = s1.play(h1, h2)
-    const s2Item = s2.play(h2, h1)
+    const s1 = p1.play(p2)
+    const s2 = p2.play(p1)
 
-    if (s1Item === s2Item) {
-        return s1Item ? GameState.ALL_C : GameState.ALL_B
+    if (s1 === s2) {
+        return s1 === true ? GameState.ALL_C : GameState.ALL_B
     }
 
-    return s1Item ? GameState.P1 : GameState.P2
+    console.log(s1 === true ? GameState.P2 : GameState.P1)
+
+    return s1 === true ? GameState.P2 : GameState.P1
 }
 
 function scoring (p1 : Player, p2: Player, gameState: GameState) : void {
@@ -23,13 +25,16 @@ function scoring (p1 : Player, p2: Player, gameState: GameState) : void {
     if (gameState === GameState.ALL_C) {
         p1.score += allCooperate
         p2.score += allCooperate
-    } else if (gameState === GameState.ALL_B) {
+    }
+    else if (gameState === GameState.ALL_B) {
         p1.score += allBetray
         p2.score += allBetray
-    } else if (gameState === GameState.P1) {
+    }
+    else if (gameState === GameState.P1) {
         p1.score += win;
         p2.score += loose;
-    } else if (gameState === GameState.P2) {
+    }
+    else if (gameState === GameState.P2) {
         p1.score += loose;
         p2.score += win
     }
@@ -37,14 +42,17 @@ function scoring (p1 : Player, p2: Player, gameState: GameState) : void {
 
 function playGame () : void {
     const tft = new TFT()
-    const allTrust = new AllTrust()
+    const allCooperator = new AllCooperator()
+    const allBetrayer = new AllBetrayer()
 
-    const tftHistory : boolean[] = []
-    const allTrustHistory : boolean[] = []
+    const tftPlayer = new Player(tft, 'TFT', '#635fa1')
+    const allCooperatePlayer = new Player(allCooperator, 'AllCooperator', '#fefefe')
+    const allBetrayPlayer = new Player(allBetrayer, 'AllBetrayer', '#e35e5e')
 
-    const result = play(tftHistory, allTrustHistory, tft, allTrust)
+    const gameState = play(tftPlayer, allBetrayPlayer)
+    scoring(tftPlayer, allBetrayPlayer, gameState)
 
-    console.log(result)
+    console.log(gameState, tftPlayer.score, allBetrayPlayer.score)
 }
 
 playGame()

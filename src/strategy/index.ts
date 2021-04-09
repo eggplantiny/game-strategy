@@ -1,13 +1,16 @@
 
-import AllTrust from "./modules/AllTrust";
+import AllCooperator from "./modules/AllCooperator";
 import TFT from "./modules/TFT";
+import AllBetrayer from './modules/AllBetrayer'
 
 export {
-    AllTrust,
+    AllCooperator,
+    AllBetrayer,
     TFT
 }
 
 export default {
-    AllTrust,
+    AllCooperator,
+    AllBetrayer,
     TFT
 }
