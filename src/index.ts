@@ -2,7 +2,7 @@ import { AllCooperator, AllBetrayer, TFT } from './strategy'
 import { GameState } from "./type"
 import Player from "./player";
 
-function play (p1: Player, p2: Player) : GameState {
+export function play (p1: Player, p2: Player) : GameState {
 
     const s1 = p1.play(p2)
     const s2 = p2.play(p1)
@@ -11,12 +11,10 @@ function play (p1: Player, p2: Player) : GameState {
         return s1 === true ? GameState.ALL_C : GameState.ALL_B
     }
 
-    console.log(s1 === true ? GameState.P2 : GameState.P1)
-
     return s1 === true ? GameState.P2 : GameState.P1
 }
 
-function scoring (p1 : Player, p2: Player, gameState: GameState) : void {
+export function scoring (p1 : Player, p2: Player, gameState: GameState) : void {
     const allCooperate = 3;
     const allBetray = 1;
     const win = 5;
@@ -51,8 +49,6 @@ function playGame () : void {
 
     const gameState = play(tftPlayer, allBetrayPlayer)
     scoring(tftPlayer, allBetrayPlayer, gameState)
-
-    console.log(gameState, tftPlayer.score, allBetrayPlayer.score)
 }
 
 playGame()

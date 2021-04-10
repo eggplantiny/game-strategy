@@ -51,8 +51,6 @@ export class Player {
         const myState = this._strategy.play(this._currentGameHistory, counterpart.currentGameHistory)
         this.pushCurrentHistory(myState)
 
-        console.log(this._name, myState)
-
         return myState
     }
 }
