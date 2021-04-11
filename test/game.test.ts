@@ -1,27 +1,27 @@
-import { scoring, play } from '../src'
 import { AllBetrayer, AllCooperator, TFT } from "../src/strategy";
-import { Player } from "../src/player/player";
-
-function playGame (p1: Player, p2: Player) : void {
-    const gameState = play(p1, p2)
-    scoring(p1, p2, gameState)
-}
+import Player from "../src/player";
+import { Game } from '../src/game';
 
 describe('TFT vs All C', () => {
     const tft = new TFT()
     const allCooperator = new AllCooperator()
 
     const tftPlayer = new Player(tft, 'TFT', '#635fa1')
-    const allCooperatePlayer = new Player(allCooperator, 'AllCooperator', '#fefefe')
+    const allCPlayer = new Player(allCooperator, 'All C', '#fefefe')
 
-    playGame(tftPlayer, allCooperatePlayer)
+    const gameSize = 10
 
-    it('TFT Score', () => {
-        expect(tftPlayer.score).toBe(3);
+    const game = new Game(tftPlayer, allCPlayer, gameSize)
+    game.play()
+
+    const [p1Score, p2Score] = game.getScore()
+
+    it(`${p1Score.name} Score`, () => {
+        expect(p1Score.score).toBe(gameSize * 3)
     })
 
-    it('All C Score', () => {
-        expect(allCooperatePlayer.score).toBe(3);
+    it(`${p2Score.name} Score`, () => {
+        expect(p2Score.score).toBe(gameSize * 3)
     })
 })
 
@@ -32,13 +32,18 @@ describe('TFT vs All B', () => {
     const tftPlayer = new Player(tft, 'TFT', '#635fa1')
     const allBPlayer = new Player(allB, 'All B', '#e35e5e')
 
-    playGame(tftPlayer, allBPlayer)
+    const gameSize = 10
 
-    it('TFT Score', () => {
-        expect(tftPlayer.score).toBe(0);
+    const game = new Game(tftPlayer, allBPlayer, gameSize)
+    game.play()
+
+    const [p1Score, p2Score] = game.getScore()
+
+    it(`${p1Score.name} Score`, () => {
+        expect(p1Score.score).toBe(0)
     })
 
-    it('All B Score', () => {
-        expect(allBPlayer.score).toBe(5)
+    it(`${p2Score.name} Score`, () => {
+        expect(p2Score.score).toBe(gameSize * 5)
     })
 })

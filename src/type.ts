@@ -1,8 +1,12 @@
-
 export type History = boolean[]
 
 export abstract class Strategy {
     abstract play (me: History, counterpart: History): boolean;
+}
+
+export interface ScoreBoard {
+    name: String,
+    score: number
 }
 
 export type PlayState = true | false;
