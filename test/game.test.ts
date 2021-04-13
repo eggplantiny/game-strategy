@@ -83,7 +83,8 @@ describe('TFT vs Random', () => {
 
     it('Random Win', function () {
         expect(p1Score.score).toBeLessThan(p2Score.score)
-    })})
+    })
+})
 
 describe('All B vs Random', () => {
     const allB = new AllBetrayer()
@@ -101,4 +102,5 @@ describe('All B vs Random', () => {
 
     it('All B Win', function () {
         expect(p1Score.score).toBeGreaterThan(p2Score.score)
-    })})
+    })
+})

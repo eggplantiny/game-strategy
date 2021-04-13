@@ -76,3 +76,17 @@ export class Game {
         }
     }
 }
+
+export class Game2 {
+    private _participantList: Array<Player>;
+    private _gameSize: number;
+
+    constructor (gameSize: number = 20) {
+        this._gameSize = gameSize;
+        this._participantList = [];
+    }
+
+    public addParticipant (player: Player): void {
+        this._participantList.push(player);
+    }
+}

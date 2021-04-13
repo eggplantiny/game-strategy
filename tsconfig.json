@@ -4,7 +4,13 @@
     "module": "commonjs",
     "strict": true,
     "outDir": "dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "lib": [
+      "dom",
+      "es5",
+      "scripthost",
+      "es2015.collection"
+    ]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
