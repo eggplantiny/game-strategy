@@ -80,13 +80,34 @@ export class Game {
 export class Game2 {
     private _participantList: Array<Player>;
     private _gameSize: number;
+    private _retrySize: number;
 
-    constructor (gameSize: number = 20) {
+    constructor (_retrySize: number = 5, gameSize: number = 20) {
+        this._retrySize = _retrySize;
         this._gameSize = gameSize;
         this._participantList = [];
     }
 
     public addParticipant (player: Player): void {
         this._participantList.push(player);
+    }
+
+    public playGame (): void {
+        const gameSize = this._gameSize;
+        const participantList = this._participantList;
+
+        const items: Array<string> = [];
+
+        for (const p1 of participantList) {
+            for (const p2 of participantList) {
+                if (p1.name === p2.name) {
+                    continue;
+                }
+
+                items.push(`${p1.name}-${p2.name}`)
+            }
+        }
+
+        console.log(items)
     }
 }

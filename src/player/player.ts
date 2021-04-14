@@ -39,6 +39,10 @@ export class Player {
         return this._score
     }
 
+    public get name () {
+        return this._name
+    }
+
     public get currentGameHistory () {
         return this._currentGameHistory
     }

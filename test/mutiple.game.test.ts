@@ -18,4 +18,10 @@ describe(' Multiple game class test', () => {
     game.addParticipant(tftPlayer)
     game.addParticipant(allCPlayer)
     game.addParticipant(allBPlayer)
+
+    game.playGame()
+
+    it('Test', function () {
+        expect(1).toBe(1)
+    })
 })
