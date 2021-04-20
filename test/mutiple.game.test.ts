@@ -1,6 +1,7 @@
 import { AllBetrayer, AllCooperator, TFT, Random } from "../src/strategy";
 import Player from "../src/player";
 import { Game2 } from '../src/game';
+import {ScoreBoard} from "../src/type";
 
 describe(' Multiple game class test', () => {
     const tft = new TFT()
@@ -20,6 +21,11 @@ describe(' Multiple game class test', () => {
     game.addParticipant(allBPlayer)
 
     game.playGame()
+    const scoreBoards: Array<ScoreBoard> = game.getScores()
+
+    scoreBoards.forEach((scoreBoard: ScoreBoard) => {
+        console.log(`[${scoreBoard.name}] ${scoreBoard.score}`)
+    })
 
     it('Test', function () {
         expect(1).toBe(1)

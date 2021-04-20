@@ -96,18 +96,28 @@ export class Game2 {
         const gameSize = this._gameSize;
         const participantList = this._participantList;
 
-        const items: Array<string> = [];
-
         for (const p1 of participantList) {
             for (const p2 of participantList) {
                 if (p1.name === p2.name) {
                     continue;
                 }
 
-                items.push(`${p1.name}-${p2.name}`)
+                const game = new Game(p1, p2, gameSize)
+                game.play()
             }
         }
+    }
 
-        console.log(items)
+    public getScores (): Array <ScoreBoard> {
+        const participantList = this._participantList;
+
+        return participantList.map((player: Player) => {
+            const scoreBoard: ScoreBoard = {
+                name: player.name,
+                score: player.score
+            };
+
+            return scoreBoard;
+        }).sort((p1, p2) => p1.score > p2.score ? -1 : 1)
     }
 }
