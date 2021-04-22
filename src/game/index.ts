@@ -1,5 +1,6 @@
 import Player from '../player'
 import { GameState, ScoreBoard } from "../type";
+import {combinations} from "../utils/array";
 
 export class Game {
 
@@ -77,9 +78,9 @@ export class Game {
     }
 }
 
-export class Game2 {
-    private _participantList: Array<Player>;
-    private _gameSize: number;
+export class GameManager {
+    private readonly _participantList: Array<Player>;
+    private readonly _gameSize: number;
     private _retrySize: number;
 
     constructor (_retrySize: number = 5, gameSize: number = 20) {
@@ -96,15 +97,9 @@ export class Game2 {
         const gameSize = this._gameSize;
         const participantList = this._participantList;
 
-        for (const p1 of participantList) {
-            for (const p2 of participantList) {
-                if (p1.name === p2.name) {
-                    continue;
-                }
-
-                const game = new Game(p1, p2, gameSize)
-                game.play()
-            }
+        for (const [p1, p2] of combinations<Player>(participantList, 2)) {
+            const game = new Game(p1, p2, gameSize)
+            game.play()
         }
     }
 
@@ -119,5 +114,10 @@ export class Game2 {
 
             return scoreBoard;
         }).sort((p1, p2) => p1.score > p2.score ? -1 : 1)
+    }
+
+    public winnerIs (): Player {
+        const participantList = this._participantList;
+        return participantList.sort((p1, p2) => p1.score > p2.score ? -1 : 1)[0]
     }
 }
