@@ -1,4 +1,5 @@
 export type History = boolean[]
+export type BeforeGameHistory = Map<string, History>
 
 export abstract class Strategy {
     abstract play (me: History, counterpart: History): boolean;

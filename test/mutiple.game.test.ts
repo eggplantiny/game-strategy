@@ -16,22 +16,25 @@ describe(' Multiple game class test', () => {
 
     const gameSize = 20
 
-    const game = new GameManager(gameSize)
+    const gameManager = new GameManager(gameSize)
 
-    game.addParticipant(tftPlayer)
-    game.addParticipant(allCPlayer)
-    game.addParticipant(allBPlayer)
-    game.addParticipant(randomPlayer)
+    gameManager.addParticipant(tftPlayer)
+    gameManager.addParticipant(allCPlayer)
+    gameManager.addParticipant(allBPlayer)
+    gameManager.addParticipant(randomPlayer)
 
-    game.playGame()
-    const scoreBoards: Array<ScoreBoard> = game.getScores()
+    gameManager.playGame(() => {
+        const scoreBoards = gameManager.getScores()
+        console.log(scoreBoards)
+    })
+    const scoreBoards: Array<ScoreBoard> = gameManager.getScores()
 
     scoreBoards.forEach((scoreBoard: ScoreBoard) => {
         console.log(`[${scoreBoard.name}] ${scoreBoard.score}`)
     })
 
     it('Winner is', function () {
-        const winner: Player = game.winnerIs()
+        const winner: Player = gameManager.winnerIs()
         expect('All B').toBe(winner.name)
     })
 })

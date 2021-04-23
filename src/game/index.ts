@@ -23,6 +23,9 @@ export class Game {
         for (let c = 0; c < gameSize; c++) {
             this.playTurn(p1, p2)
         }
+
+        p1.setBeforeGameHistory(p2.name, p2.currentGameHistory)
+        p2.setBeforeGameHistory(p1.name, p1.currentGameHistory)
     }
 
     public getScore (): ScoreBoard[] {
@@ -83,17 +86,13 @@ export class GameManager {
     private readonly _gameSize: number;
     private _retrySize: number;
 
-    constructor (_retrySize: number = 5, gameSize: number = 20) {
+    constructor (_retrySize: number = 10, gameSize: number = 20) {
         this._retrySize = _retrySize;
         this._gameSize = gameSize;
         this._participantList = [];
     }
 
-    public addParticipant (player: Player): void {
-        this._participantList.push(player);
-    }
-
-    public playGame (): void {
+    private playOneCycle (): void {
         const gameSize = this._gameSize;
         const participantList = this._participantList;
 
@@ -101,6 +100,20 @@ export class GameManager {
             const game = new Game(p1, p2, gameSize)
             game.play()
         }
+    }
+
+    public playGame (callback?: Function): void {
+        for (let c = 0; c < this._retrySize; c += 1) {
+            this.playOneCycle()
+
+            if (callback) {
+                callback()
+            }
+        }
+    }
+
+    public addParticipant (player: Player): void {
+        this._participantList.push(player);
     }
 
     public getScores (): Array <ScoreBoard> {
