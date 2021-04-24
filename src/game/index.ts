@@ -23,9 +23,6 @@ export class Game {
         for (let c = 0; c < gameSize; c++) {
             this.playTurn(p1, p2)
         }
-
-        p1.setBeforeGameHistory(p2.name, p2.currentGameHistory)
-        p2.setBeforeGameHistory(p1.name, p1.currentGameHistory)
     }
 
     public getScore (): ScoreBoard[] {
@@ -47,6 +44,9 @@ export class Game {
     private rollDice (p1: Player, p2: Player): GameState {
         const s1 = p1.play(p2)
         const s2 = p2.play(p1)
+
+        p1.saveGameHistory(p2, s1, s2)
+        p2.saveGameHistory(p1, s2, s1)
 
         if (s1 === s2) {
             return s1 === true ? GameState.ALL_C : GameState.ALL_B

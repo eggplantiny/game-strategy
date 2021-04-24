@@ -1,11 +1,13 @@
-import { Strategy } from "../../type";
+import { GameHistory, Strategy } from "../../type";
 
 export default class TFT extends Strategy {
-    play (gameHistory: boolean[]): boolean {
-        if (gameHistory.length === 0) {
+    play (gameHistory: GameHistory): boolean {
+        const counterpartHistory = gameHistory.counterpartHistory
+
+        if (counterpartHistory.length === 0) {
             return true
         }
 
-        return gameHistory[gameHistory.length - 1]
+        return counterpartHistory[counterpartHistory.length - 1]
     }
 }

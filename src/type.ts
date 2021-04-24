@@ -1,8 +1,17 @@
+import {Player} from "./player";
+
 export type History = boolean[]
+export type PlayerName = string
 export type BeforeGameHistory = Map<string, History>
+export type PlayHistory = Map<PlayerName, GameHistory>
 
 export abstract class Strategy {
-    abstract play (me: History, counterpart: History): boolean;
+    abstract play (gameHistory: GameHistory): boolean;
+}
+
+export interface GameHistory {
+    myHistory: History,
+    counterpartHistory: History
 }
 
 export interface ScoreBoard {

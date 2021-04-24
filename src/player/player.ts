@@ -1,20 +1,18 @@
-import { Strategy, History, ScoreBoard, BeforeGameHistory } from "../type"
+import { Strategy, History, ScoreBoard, BeforeGameHistory, PlayHistory, PlayerName, GameHistory } from "../type"
 
 export class  Player {
     private _color: string
     private _strategy: Strategy
     private _score: number
-    private _name: string
-    private _currentGameHistory: History
-    private _beforeGameHistory: BeforeGameHistory
+    private _name: PlayerName
+    private _playHistory: PlayHistory
 
     constructor (strategy: Strategy, name: string, color: string) {
         this._strategy = strategy
         this._name = name
         this._color = color
         this._score = 0
-        this._currentGameHistory = []
-        this._beforeGameHistory = new Map <string, History> ()
+        this._playHistory = new Map <PlayerName, GameHistory> ()
     }
 
     public getScoreBoard (): ScoreBoard {
@@ -45,47 +43,39 @@ export class  Player {
         return this._name
     }
 
-    public get currentGameHistory () {
-        return this._currentGameHistory
+    private isFirstMeet (counterpart: Player): boolean {
+        return this._playHistory.has(counterpart.name)
     }
 
-    public set currentGameHistory (history: History) {
-        this._currentGameHistory = history
-    }
-
-    private pushCurrentHistory (value: boolean): void {
-        this._currentGameHistory.push(value)
-    }
-
-    private clearCurrentHistory (): void {
-        this._currentGameHistory.splice(0, this._currentGameHistory.length)
-    }
-
-    public getBeforeGameHistory (playerName: string): History {
-        const beforeGameHistory = this._beforeGameHistory
-
-        if (!beforeGameHistory.has(playerName)) {
-            throw new Error(`Can't find playerName ${playerName}.`)
+    private initPlayHistory (counterpart: Player) {
+        const playHistory: GameHistory = {
+            myHistory: [],
+            counterpartHistory: []
         }
 
-        return beforeGameHistory.get(playerName)!
+        this._playHistory.set(counterpart.name, playHistory)
     }
 
-    public setBeforeGameHistory (playerName: string, history: History) {
-        const beforeGameHistory = this._beforeGameHistory
-
-        if (!beforeGameHistory.has(playerName)) {
-            throw new Error(`Can't find playerName ${playerName}.`)
-        }
-
-        beforeGameHistory.set(playerName, history)
+    private getGameHistory (counterpart: Player): GameHistory {
+        return this._playHistory.get(counterpart.name)!
     }
 
     public play (counterpart: Player): boolean {
-        const myState = this._strategy.play(this._currentGameHistory, counterpart.currentGameHistory)
-        this.pushCurrentHistory(myState)
+        if (this.isFirstMeet(counterpart)) {
+            this.initPlayHistory(counterpart)
+        }
 
-        return myState
+        const gameHistory: GameHistory = this.getGameHistory(counterpart)
+        const state = this._strategy.play(gameHistory)
+
+        return state
+    }
+
+    public saveGameHistory (counterpart: Player, myState: boolean, counterpartState: boolean) {
+        const gameHistory = this.getGameHistory(counterpart)
+
+        gameHistory.myHistory.push(myState)
+        gameHistory.counterpartHistory.push(counterpartState)
     }
 }
 
