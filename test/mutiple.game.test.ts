@@ -1,4 +1,4 @@
-import { AllBetrayer, AllCooperator, TFT, Random } from "../src/strategy";
+import { AllBetrayer, AllCooperator, TFT, Random, Joss } from "../src/strategy";
 import Player from "../src/player";
 import { GameManager } from '../src/game';
 import { ScoreBoard } from "../src/type";
@@ -7,30 +7,29 @@ describe(' Multiple game class test', () => {
     const tft = new TFT()
     const allC = new AllCooperator()
     const allB = new AllBetrayer()
-    const random = new Random()
+    const random = new Random(0.2)
+    const joss = new Joss()
 
     const tftPlayer = new Player(tft, 'TFT', '#635fa1')
     const allCPlayer = new Player(allC, 'All C', '#fefefe')
     const allBPlayer = new Player(allB, 'All B', '#fe5325')
     const randomPlayer = new Player(random, 'Random', '#e2589e')
-    const tftPlayer2 = new Player(tft, 'TFT 2', '#635fa1')
-    const tftPlayer3 = new Player(tft, 'TFT 3', '#635fa1')
-
+    const jossPlayer = new Player(joss, 'Joss', '#6311a1')
 
     const gameSize = 20
 
     const gameManager = new GameManager(gameSize)
 
     gameManager.addParticipant(tftPlayer)
-    gameManager.addParticipant(allCPlayer)
+    // gameManager.addParticipant(allCPlayer)
     gameManager.addParticipant(allBPlayer)
     gameManager.addParticipant(randomPlayer)
-    gameManager.addParticipant(tftPlayer2)
-    gameManager.addParticipant(tftPlayer3)
+    gameManager.addParticipant(jossPlayer)
 
     gameManager.playGame(() => {
         const scoreBoards = gameManager.getScores()
         console.log(scoreBoards)
+        jossPlayer.printHistory(tftPlayer)
     })
     const scoreBoards: Array<ScoreBoard> = gameManager.getScores()
 
@@ -40,6 +39,6 @@ describe(' Multiple game class test', () => {
 
     it('Winner is', function () {
         const winner: Player = gameManager.winnerIs()
-        expect('All B').toBe(winner.name)
+        expect('TFT').toBe(winner.name)
     })
 })
