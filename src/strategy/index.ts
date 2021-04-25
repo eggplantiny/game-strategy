@@ -5,6 +5,7 @@ import AllBetrayer from './modules/AllBetrayer';
 import Random from './modules/Random';
 import Joss from './modules/Joss';
 import FriedMan from "./modules/FriedMan";
+import TF2T from "./modules/TF2T";
 
 export {
     AllCooperator,
@@ -12,7 +13,8 @@ export {
     TFT,
     Random,
     Joss,
-    FriedMan
+    FriedMan,
+    TF2T
 }
 
 export default {
@@ -21,5 +23,6 @@ export default {
     TFT,
     Random,
     Joss,
-    FriedMan
+    FriedMan,
+    TF2T
 }
