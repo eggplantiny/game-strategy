@@ -13,6 +13,9 @@ describe(' Multiple game class test', () => {
     const allCPlayer = new Player(allC, 'All C', '#fefefe')
     const allBPlayer = new Player(allB, 'All B', '#fe5325')
     const randomPlayer = new Player(random, 'Random', '#e2589e')
+    const tftPlayer2 = new Player(tft, 'TFT 2', '#635fa1')
+    const tftPlayer3 = new Player(tft, 'TFT 3', '#635fa1')
+
 
     const gameSize = 20
 
@@ -22,6 +25,8 @@ describe(' Multiple game class test', () => {
     gameManager.addParticipant(allCPlayer)
     gameManager.addParticipant(allBPlayer)
     gameManager.addParticipant(randomPlayer)
+    gameManager.addParticipant(tftPlayer2)
+    gameManager.addParticipant(tftPlayer3)
 
     gameManager.playGame(() => {
         const scoreBoards = gameManager.getScores()

@@ -44,7 +44,7 @@ export class  Player {
     }
 
     private isFirstMeet (counterpart: Player): boolean {
-        return this._playHistory.has(counterpart.name)
+        return !this._playHistory.has(counterpart.name)
     }
 
     private initPlayHistory (counterpart: Player) {
@@ -58,6 +58,16 @@ export class  Player {
 
     private getGameHistory (counterpart: Player): GameHistory {
         return this._playHistory.get(counterpart.name)!
+    }
+
+    public printHistory (counterpart: Player): void {
+        const { myHistory, counterpartHistory } = this.getGameHistory(counterpart)
+        const myHistoryString = myHistory.map(state => state ? 'O' : 'X').join(' ')
+        const counterpartHistoryString = counterpartHistory.map(state => state ? 'O' : 'X').join(' ')
+
+        console.log(`${this.name} vs ${counterpart.name}`)
+        console.log(`[${this.name}] - [${myHistoryString}]`)
+        console.log(`[${counterpart.name}] - [${counterpartHistoryString}]`)
     }
 
     public play (counterpart: Player): boolean {

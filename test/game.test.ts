@@ -39,12 +39,8 @@ describe('TFT vs All B', () => {
 
     const [p1Score, p2Score] = game.getScore()
 
-    it(`${p1Score.name} Score`, () => {
-        expect(p1Score.score).toBe(0)
-    })
-
-    it(`${p2Score.name} Score`, () => {
-        expect(p2Score.score).toBe(gameSize * 5)
+    it(`Winner is`, () => {
+        expect(p2Score.score).toBeGreaterThan(p1Score.score)
     })
 })
 
@@ -78,6 +74,8 @@ describe('TFT vs Random', () => {
 
     const game = new Game(tftPlayer, randomPlayer, gameSize)
     game.play()
+
+    tftPlayer.printHistory(randomPlayer)
 
     const [p1Score, p2Score] = game.getScore()
 
