@@ -1,4 +1,4 @@
-import { Strategy, History, ScoreBoard, BeforeGameHistory, PlayHistory, PlayerName, GameHistory } from "../type"
+import { Strategy, ScoreBoard, PlayHistory, PlayerName, GameHistory, GameReport } from "../type"
 
 export class  Player {
     private _color: string
@@ -66,6 +66,22 @@ export class  Player {
         const counterpartHistoryString = counterpartHistory.map(state => state ? 'O' : 'X').join(' ')
 
         console.log(`${this.name} vs ${counterpart.name}\n[${this.name}] - [${myHistoryString}]\n[${counterpart.name}] - [${counterpartHistoryString}]`)
+    }
+
+    public exportHistory (counterpart: Player): GameReport {
+        const { myHistory, counterpartHistory } = this.getGameHistory(counterpart)
+        return {
+            Me: {
+                History: myHistory,
+                Name: this.name,
+                Strategy: this._strategy.name
+            },
+            Counterpart: {
+                History: counterpartHistory,
+                Name: counterpart.name,
+                Strategy: counterpart._strategy.name
+            }
+        }
     }
 
     public play (counterpart: Player): boolean {

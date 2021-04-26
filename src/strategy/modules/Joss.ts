@@ -2,10 +2,10 @@ import { GameHistory, Strategy } from "../../type";
 
 export default class Joss extends Strategy {
 
-    private _threshold: number;
+    private readonly _threshold: number;
 
     constructor (threshold = 0.9) {
-        super();
+        super(Joss.name);
         this._threshold = threshold;
     }
 

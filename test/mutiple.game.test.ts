@@ -44,7 +44,8 @@ describe(' Multiple game class test', () => {
     //     console.log(`[${scoreBoard.name}] ${scoreBoard.score}`)
     // })
     console.log(scoreBoards)
-
+    const gameHistory = tf2tPlayer.exportHistory(randomPlayer)
+    console.log(JSON.stringify(gameHistory, null, 4))
 
     it('Winner is', function () {
         const winner: Player = gameManager.winnerIs()

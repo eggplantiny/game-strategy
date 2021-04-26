@@ -4,7 +4,7 @@ export default class TF2T extends Strategy {
     private _betrayalCountMap: Map<string, number>;
 
     constructor () {
-        super();
+        super(TF2T.name);
         console.log('TF2T constructed')
         this._betrayalCountMap = new Map();
     }

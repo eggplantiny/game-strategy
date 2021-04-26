@@ -1,10 +1,10 @@
 import { Strategy } from "../../type"
 
-export default class AllCooperator extends Strategy {
-    private _threshold: number;
+export default class Random extends Strategy {
+    private readonly _threshold: number;
 
     constructor (threshold = 0.5) {
-        super();
+        super(Random.name);
         this._threshold = threshold;
     }
 

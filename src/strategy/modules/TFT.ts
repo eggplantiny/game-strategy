@@ -1,6 +1,11 @@
 import { GameHistory, Strategy } from "../../type";
 
 export default class TFT extends Strategy {
+    constructor () {
+        super(TFT.name);
+
+    }
+
     play (gameHistory: GameHistory): boolean {
         const counterpartHistory = gameHistory.counterpartHistory
 
