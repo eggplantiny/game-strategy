@@ -20,8 +20,8 @@ describe(' Multiple game class test', () => {
     const friedManPlayer = new Player(friedMan, 'Fried Man', '#5310f1')
     const tf2tPlayer = new Player(tf2t, 'TF2T', '#756fa1')
 
-    const retrySize = 50
-    const gameSize = 10
+    const retrySize = 5
+    const gameSize = 20
 
     const gameManager = new GameManager(retrySize, gameSize)
 
@@ -36,7 +36,7 @@ describe(' Multiple game class test', () => {
     gameManager.playGame(() => {
         const scoreBoards = gameManager.getScores()
         // console.log(scoreBoards)
-        // friedManPlayer.printHistory(jossPlayer)
+        tf2tPlayer.printHistory(tftPlayer)
     })
     const scoreBoards: Array<ScoreBoard> = gameManager.getScores()
 

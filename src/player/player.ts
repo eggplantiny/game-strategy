@@ -65,9 +65,7 @@ export class  Player {
         const myHistoryString = myHistory.map(state => state ? 'O' : 'X').join(' ')
         const counterpartHistoryString = counterpartHistory.map(state => state ? 'O' : 'X').join(' ')
 
-        console.log(`${this.name} vs ${counterpart.name}`)
-        console.log(`[${this.name}] - [${myHistoryString}]`)
-        console.log(`[${counterpart.name}] - [${counterpartHistoryString}]`)
+        console.log(`${this.name} vs ${counterpart.name}\n[${this.name}] - [${myHistoryString}]\n[${counterpart.name}] - [${counterpartHistoryString}]`)
     }
 
     public play (counterpart: Player): boolean {
@@ -76,7 +74,7 @@ export class  Player {
         }
 
         const gameHistory: GameHistory = this.getGameHistory(counterpart)
-        const state = this._strategy.play(gameHistory)
+        const state = this._strategy.play(gameHistory, counterpart.name)
 
         return state
     }

@@ -6,7 +6,7 @@ export type BeforeGameHistory = Map<string, History>
 export type PlayHistory = Map<PlayerName, GameHistory>
 
 export abstract class Strategy {
-    abstract play (gameHistory: GameHistory): boolean;
+    abstract play (gameHistory: GameHistory, counterpartName: PlayerName): boolean;
 }
 
 export interface GameHistory {
