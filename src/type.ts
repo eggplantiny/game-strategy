@@ -1,5 +1,3 @@
-import {Player} from "./player";
-
 export type History = boolean[]
 export type PlayerName = string
 export type StrategyName = string

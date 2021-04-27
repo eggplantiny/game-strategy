@@ -5,7 +5,6 @@ export default class TF2T extends Strategy {
 
     constructor () {
         super(TF2T.name);
-        console.log('TF2T constructed')
         this._betrayalCountMap = new Map();
     }
 
@@ -21,7 +20,7 @@ export default class TF2T extends Strategy {
         this._betrayalCountMap.set(counterpartName, count)
     }
 
-    public play (gameHistory: GameHistory, counterpartName: PlayerName): boolean {
+    play (gameHistory: GameHistory, counterpartName: PlayerName): boolean {
         const counterpartHistory = gameHistory.counterpartHistory;
 
         if (counterpartHistory.length === 0) {
