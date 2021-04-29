@@ -1,5 +1,5 @@
 import Player from '../player';
-import {GameHistory, GameState, PlayerName, ScoreBoard} from "../type";
+import {GameHistory, GameReport, GameState, PlayerName, ScoreBoard} from "../type";
 import { combinations } from "../utils/array";
 
 export class Game {
@@ -129,8 +129,31 @@ export class GameManager {
         }).sort((p1, p2) => p1.score > p2.score ? -1 : 1)
     }
 
-    public exportGameHistory (): Map <PlayerName, GameHistory> {
-        const result = new Map <PlayerName, GameHistory> ();
+    public exportGameReports (): Array<Array<GameReport>> {
+        const reportMap = new Map <PlayerName, Array<GameReport>> ();
+        const participantList = this._participantList;
+
+        for (const p1 of participantList) {
+            for (const p2 of participantList) {
+                if (p1.name === p2.name) {
+                    continue;
+                }
+
+                const targetName = p1.name;
+                if (!reportMap.has(targetName)) {
+                    reportMap.set(targetName, []);
+                }
+
+                const gameHistory = p1.exportGameReport(p2);
+                reportMap.get(targetName)!.push(gameHistory);
+            }
+        }
+
+        const result = [];
+        for (const key of reportMap.keys()) {
+            const reportList = reportMap.get(key)!;
+            result.push(reportList)
+        }
 
         return result;
     }

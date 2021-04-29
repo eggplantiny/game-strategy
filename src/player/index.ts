@@ -64,7 +64,7 @@ export default class  Player {
         console.log(`${this.name} vs ${counterpart.name}\n[${this.name}] - [${myHistoryString}]\n[${counterpart.name}] - [${counterpartHistoryString}]`);
     }
 
-    public exportHistory (counterpart: Player): GameReport {
+    public exportGameReport (counterpart: Player): GameReport {
         const { myHistory, counterpartHistory } = this.getGameHistory(counterpart);
         return {
             Me: {

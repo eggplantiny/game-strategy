@@ -38,11 +38,14 @@ describe(' Multiple game class test', () => {
     gameManager.addParticipant(zigZagPlayer)
 
     gameManager.playGame(() => {
-        tftPlayer.printHistory(zigZagPlayer)
+        // tftPlayer.printHistory(zigZagPlayer)
     })
 
     const scoreBoards: Array<ScoreBoard> = gameManager.getScores()
     console.log(scoreBoards)
+
+    const gameReport = gameManager.exportGameReports()
+    console.log(JSON.stringify(gameReport, null, 2))
 
     it('Winner is', function () {
         const winner: Player = gameManager.winnerIs()
