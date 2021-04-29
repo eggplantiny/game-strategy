@@ -1,5 +1,5 @@
 import Player from '../player';
-import { GameState, ScoreBoard } from "../type";
+import {GameHistory, GameState, PlayerName, ScoreBoard} from "../type";
 import { combinations } from "../utils/array";
 
 export class Game {
@@ -127,6 +127,12 @@ export class GameManager {
 
             return scoreBoard;
         }).sort((p1, p2) => p1.score > p2.score ? -1 : 1)
+    }
+
+    public exportGameHistory (): Map <PlayerName, GameHistory> {
+        const result = new Map <PlayerName, GameHistory> ();
+
+        return result;
     }
 
     public winnerIs (): Player {
