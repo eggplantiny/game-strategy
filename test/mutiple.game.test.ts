@@ -2,6 +2,7 @@ import {AllBetrayer, AllCooperator, TFT, Random, Joss, FriedMan, TF2T} from "../
 import Player from "../src/player";
 import { GameManager } from '../src/game';
 import { ScoreBoard } from "../src/type";
+import ZigZag from "../src/strategy/modules/ZigZag";
 
 describe(' Multiple game class test', () => {
     const tft = new TFT()
@@ -9,11 +10,13 @@ describe(' Multiple game class test', () => {
     const allB = new AllBetrayer()
     const random = new Random(0.2)
     const joss = new Joss()
+    const zigZag = new ZigZag()
     const friedMan = new FriedMan()
     const tf2t = new TF2T()
 
     const tftPlayer = new Player(tft, 'TFT', '#635fa1')
     const allCPlayer = new Player(allC, 'All C', '#fefefe')
+    const zigZagPlayer = new Player(zigZag, 'Zig Zag', '#0ff0f0')
     const allBPlayer = new Player(allB, 'All B', '#fe5325')
     const randomPlayer = new Player(random, 'Random', '#e2589e')
     const jossPlayer = new Player(joss, 'Joss', '#6311a1')
@@ -32,20 +35,14 @@ describe(' Multiple game class test', () => {
     gameManager.addParticipant(jossPlayer)
     gameManager.addParticipant(friedManPlayer)
     gameManager.addParticipant(tf2tPlayer)
+    gameManager.addParticipant(zigZagPlayer)
 
     gameManager.playGame(() => {
-        const scoreBoards = gameManager.getScores()
-        // console.log(scoreBoards)
-        tf2tPlayer.printHistory(tftPlayer)
+        tftPlayer.printHistory(zigZagPlayer)
     })
-    const scoreBoards: Array<ScoreBoard> = gameManager.getScores()
 
-    // scoreBoards.forEach((scoreBoard: ScoreBoard) => {
-    //     console.log(`[${scoreBoard.name}] ${scoreBoard.score}`)
-    // })
+    const scoreBoards: Array<ScoreBoard> = gameManager.getScores()
     console.log(scoreBoards)
-    const gameHistory = tf2tPlayer.exportHistory(randomPlayer)
-    console.log(JSON.stringify(gameHistory, null, 4))
 
     it('Winner is', function () {
         const winner: Player = gameManager.winnerIs()
