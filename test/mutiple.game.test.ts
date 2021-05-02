@@ -3,6 +3,7 @@ import Player from "../src/player";
 import { GameManager } from '../src/game';
 import { ScoreBoard } from "../src/type";
 import ZigZag from "../src/strategy/modules/ZigZag";
+import {exportFile} from "../src/utils/exportFile";
 
 describe(' Multiple game class test', () => {
     const tft = new TFT()
@@ -45,7 +46,8 @@ describe(' Multiple game class test', () => {
     console.log(scoreBoards)
 
     const gameReport = gameManager.exportGameReports()
-    console.log(JSON.stringify(gameReport, null, 2))
+    const data = JSON.stringify(gameReport, null, 2)
+    exportFile('hello.json', data)
 
     it('Winner is', function () {
         const winner: Player = gameManager.winnerIs()

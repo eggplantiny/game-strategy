@@ -4,3 +4,6 @@ const rows = [
 ];
 
 let csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
+
+
+// export function create
