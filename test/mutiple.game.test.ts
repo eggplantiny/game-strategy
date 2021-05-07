@@ -74,8 +74,8 @@ describe('Super Multiple Game', () => {
 
     const playerInfoList = [
         { name: 'TFT', color: '#635fa1', strategy: tft },
-        { name: 'All B', color: '#fe5325', strategy: allB },
-        { name: 'Random', color: '#e2589e', strategy: random },
+        // { name: 'All B', color: '#fe5325', strategy: allB },
+        // { name: 'Random', color: '#e2589e', strategy: random },
         { name: 'Joss', color: '#6311a1', strategy: joss },
         { name: 'Zig Zag', color: '#0ff0f0', strategy: zigZag },
         { name: 'Fried Man', color: '#5310f1', strategy: friedMan },
@@ -90,8 +90,7 @@ describe('Super Multiple Game', () => {
     const gameSize = 20
 
     const gameManager = new GameManager(retrySize, gameSize)
-
-    playerList.forEach(player => gameManager.addParticipant(player))
+    gameManager.addParticipants(playerList)
 
     gameManager.playGame()
 

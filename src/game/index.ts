@@ -116,6 +116,10 @@ export class GameManager {
         this._participantList.push(player);
     }
 
+    public addParticipants (playerList: Array<Player>): void {
+        this._participantList.push(...playerList)
+    }
+
     public getScores (): Array <ScoreBoard> {
         const participantList = this._participantList;
 
