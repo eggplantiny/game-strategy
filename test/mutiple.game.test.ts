@@ -1,7 +1,7 @@
-import {AllBetrayer, AllCooperator, TFT, Random, Joss, FriedMan, TF2T} from "../src/strategy";
+import { AllBetrayer, AllCooperator, TFT, Random, Joss, FriedMan, TF2T } from "../src/strategy";
 import Player from "../src/player";
 import { GameManager } from '../src/game';
-import {GameReport, ScoreBoard, Strategy} from "../src/type";
+import { ScoreBoard, Strategy } from "../src/type";
 import ZigZag from "../src/strategy/modules/ZigZag";
 import {exportFile} from "../src/utils/exportFile";
 
@@ -74,8 +74,8 @@ describe('Super Multiple Game', () => {
 
     const playerInfoList = [
         { name: 'TFT', color: '#635fa1', strategy: tft },
-        // { name: 'All B', color: '#fe5325', strategy: allB },
-        // { name: 'Random', color: '#e2589e', strategy: random },
+        { name: 'All B', color: '#fe5325', strategy: allB },
+        { name: 'Random', color: '#e2589e', strategy: random },
         { name: 'Joss', color: '#6311a1', strategy: joss },
         { name: 'Zig Zag', color: '#0ff0f0', strategy: zigZag },
         { name: 'Fried Man', color: '#5310f1', strategy: friedMan },
