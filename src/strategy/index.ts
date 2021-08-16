@@ -6,6 +6,7 @@ import Random from './modules/Random';
 import Joss from './modules/Joss';
 import FriedMan from "./modules/FriedMan";
 import TF2T from "./modules/TF2T";
+import TFTWO from './modules/TFTWO';
 
 export {
     AllCooperator,
@@ -14,7 +15,8 @@ export {
     Random,
     Joss,
     FriedMan,
-    TF2T
+    TF2T,
+    TFTWO
 }
 
 export default {
@@ -24,5 +26,6 @@ export default {
     Random,
     Joss,
     FriedMan,
-    TF2T
+    TF2T,
+    TFTWO
 }
