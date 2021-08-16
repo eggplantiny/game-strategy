@@ -8,16 +8,20 @@ export default class TFTWO extends Strategy {
 
     play (gameHistory: GameHistory): boolean {
         const counterpartHistory = gameHistory.counterpartHistory
-        const odds = 0.2
+        const odds = 0.8
 
         if (counterpartHistory.length === 0) {
+            return true
+        }
+
+        const result = counterpartHistory[counterpartHistory.length - 1]
+
+        if (result === false) {
             if (Math.random() > odds) {
                 return true
-            } else {
-                return false
             }
         }
 
-        return counterpartHistory[counterpartHistory.length - 1]
+        return result
     }
 }
